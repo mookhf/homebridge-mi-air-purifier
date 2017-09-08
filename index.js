@@ -21,7 +21,7 @@ function MiAirPurifier(log, config) {
 
 	// Modes supported
 	this.modes = [
-		[0, 'idle'], [60, 'auto'], [80, 'silent'], [100, 'favorite']
+		[0, 'idle'],[20,'silent'],[60, 'auto'], [100, 'favorite']
 	];
 
 	// Air purifier is not available in Homekit yet, register as Fan
@@ -127,7 +127,7 @@ MiAirPurifier.prototype = {
 			return;
 		}
 
-		callback(null, this.device.mode == 'idle');
+		callback(null, this.device.mode != 'idle');
 	},
 
 	setPowerState: function(state, callback) {
@@ -155,8 +155,9 @@ MiAirPurifier.prototype = {
 			return;
 		}
 
+		var mode = this.device.mode
 		for(var item of this.modes){
-			if(this.device.mode == item[1]){
+			if(mode == item[1]){
 				callback(null, item[0]);
 				return;
 			}
