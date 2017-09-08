@@ -127,7 +127,7 @@ MiAirPurifier.prototype = {
 			return;
 		}
 
-		callback(null, this.device.power);
+		callback(null, this.device.mode == 'idle');
 	},
 
 	setPowerState: function(state, callback) {
@@ -136,7 +136,7 @@ MiAirPurifier.prototype = {
 			return;
 		}
 
-		this.device.setPower(state);
+		this.device.setMode(state ? 'auto' : 'idle');
 		callback();
 	},
 
